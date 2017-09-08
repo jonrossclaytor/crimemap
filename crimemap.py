@@ -22,7 +22,6 @@ def home():
     
     crimes = DB.get_all_crimes()
     crimes = json.dumps(crimes)
-    print('this is home')
     return render_template("home.html", crimes=crimes)
 
 
@@ -40,4 +39,4 @@ if __name__ == '__main__':
     handler = RotatingFileHandler('loghere.log', maxBytes=10000, backupCount=1)
     handler.setLevel(logging.INFO)
     app.logger.addHandler(handler)
-    app.run()
+    app.run(debug=True)
