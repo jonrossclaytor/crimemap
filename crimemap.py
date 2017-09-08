@@ -37,4 +37,7 @@ def submitcrime():
     return home()
 
 if __name__ == '__main__':
+    handler = RotatingFileHandler('loghere.log', maxBytes=10000, backupCount=1)
+    handler.setLevel(logging.INFO)
+    app.logger.addHandler(handler)
     app.run(debug=True)
