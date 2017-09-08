@@ -1,5 +1,5 @@
 import datetime
-import dateparser
+#import dateparser
 import dbconfig
 from flask import Flask
 from flask import render_template
@@ -32,7 +32,7 @@ def submitcrime():
         return home()
     
     date = request.form.get("date")
-    date = format_date(date)
+    #date = format_date(date)
     if not date:
         return home("Invalid date.  Please use yyyy-mm-dd format.")
     try:
@@ -44,12 +44,14 @@ def submitcrime():
     DB.add_crime(category, date, latitude, longitude, description)
     return home()
 
+"""
 def format_date(userdate):
     date = dateparser.parse(userdate)
     try:
         return datetime.datetime.strftime(date, "%Y-%m-%d")
     except TypeError:
         return None
+"""
 
 def sanitize_string(userinput):
     whitelist = string.ascii_letters + string.digits + "!@#$%^&*()?'"
