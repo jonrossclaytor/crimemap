@@ -1,9 +1,10 @@
+import dbconfig
 from flask import Flask
 from flask import render_template
 from flask import request
 import json
-import dbconfig
-import sys
+import logging
+from logging.handlers import RotatingFileHandler
 
 if dbconfig.test:
     from mockdbhelper import MockDBHelper as DBHelper
@@ -15,7 +16,10 @@ DB = DBHelper()
 
 @app.route("/")
 def home():
-    app.logger.info('made it to home')
+    app.logger.warning('A warning occurred (%d apples)', 42)
+    app.logger.error('An error occurred')
+    app.logger.info('Info')
+    
     crimes = DB.get_all_crimes()
     crimes = json.dumps(crimes)
     print('this is home')
@@ -31,6 +35,9 @@ def submitcrime():
     description = request.form.get("description")
     DB.add_crime(category, date, latitude, longitude, description)
     return home()
+
+
+f.close()
 
 if __name__ == '__main__':
     app.run(debug=True)
