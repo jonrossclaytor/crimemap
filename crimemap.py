@@ -36,8 +36,5 @@ def submitcrime():
     DB.add_crime(category, date, latitude, longitude, description)
     return home()
 
-
-f.close()
-
 if __name__ == '__main__':
     app.run(debug=True)
