@@ -15,7 +15,7 @@ class DBHelper:
     def add_crime(self, category, date, latitude, longitude, desc):
         connection = self.connect()
         try:
-            query = "INSERT INTO crimes (category, date, latitude, longitude, description) \
+            query = "INSERT INTO crimemap.crimes (category, date, latitude, longitude, description) \
                      VALUES (%s, %s, %s, %s, %s)"
             with connection.cursor() as cursor:
                 cursor.execute(
@@ -29,7 +29,7 @@ class DBHelper:
     def get_all_crimes(self):
         connection = self.connect()
         try:
-            query = "SELECT latitude, longitude, date, category, description FROM crimes;"
+            query = "SELECT latitude, longitude, date, category, description FROM crimemap.crimes;"
             with connection.cursor() as cursor:
                 cursor.execute(query)
             named_crimes = []
