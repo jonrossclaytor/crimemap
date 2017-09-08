@@ -4,8 +4,8 @@
 
   <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/style.css') }}" /> 
 
-  <script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js">
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCH8OgHyTcNUKnlwMkmQwXHKGcLfkRXISM&callback=initMap"
+  type="text/javascript">
   </script> 
 
   <script type="text/javascript">
@@ -15,8 +15,8 @@
 
     function initialize() { 
       var mapOptions = {
-        center: new google.maps.LatLng(-33.30578381949298, 26.523442268371582),
-        zoom: 15
+        center: new google.maps.LatLng(39.0997, -94.5786)),
+        zoom: 10
       };
       map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
       google.maps.event.addListener(map, 'click', function(event){   
@@ -54,7 +54,7 @@
 </head>
   <body onload="initialize()">
       <h1>CrimeMap</h1>
-      <p>A map of recent criminal activity in the Grahamstown area.</p>
+      <p>A map of recent criminal activity in the Kansas City area.</p>
       <div id="map-canvas"></div>
 
       <div id="newcrimeform">
