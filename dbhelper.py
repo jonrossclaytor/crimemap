@@ -13,12 +13,12 @@ class DBHelper:
                                db=database)
 
     def add_crime(self, category, date, latitude, longitude, desc):
+        print('This error output', file=sys.stderr)
+        print('This standard output', file=sys.stdout)
         connection = self.connect()
         try:
             query = "INSERT INTO crimes (category, date, latitude, longitude, description) \
                      VALUES (%s, %s, %s, %s, %s)"
-            print('This error output', file=sys.stderr)
-            print('This standard output', file=sys.stdout)
             with connection.cursor() as cursor:
                 cursor.execute(
                     query, (category, date, latitude, longitude, desc))
