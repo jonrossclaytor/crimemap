@@ -3,6 +3,8 @@ from flask import render_template
 from flask import request
 import json
 import dbconfig
+import sys
+
 if dbconfig.test:
     from mockdbhelper import MockDBHelper as DBHelper
 else:
