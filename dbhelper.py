@@ -13,9 +13,6 @@ class DBHelper:
                                db=database)
 
     def add_crime(self, category, date, latitude, longitude, desc):
-        print('This error output', file=sys.stderr)
-        print('This standard output', file=sys.stdout)
-        print('This is regular print')
         
         connection = self.connect()
         try:
