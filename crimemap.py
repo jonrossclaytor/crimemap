@@ -1,42 +1,29 @@
 import dbconfig
-if dbconfig.test:
-    from mockdbhelper import MockDBHelper as DBHelper
-else:
-    from dbhelper import DBHelper
-    
 from flask import Flask
 from flask import render_template
 from flask import request
 import json
+import logging
+from logging.handlers import RotatingFileHandler
+
+if dbconfig.test:
+    from mockdbhelper import MockDBHelper as DBHelper
+else:
+    from dbhelper import DBHelper
 
 app = Flask(__name__)
 DB = DBHelper()
 
-
 @app.route("/")
 def home():
+    app.logger.warning('A warning occurred (%d apples)', 42)
+    app.logger.error('An error occurred')
+    app.logger.info('Info')
+    
     crimes = DB.get_all_crimes()
     crimes = json.dumps(crimes)
-    render_template("home.html", crimes=crimes)
+    return render_template("home.html", crimes=crimes)
 
-
-@app.route("/add", methods=["POST"])
-def add():
-    try:
-        data = request.form.get("userinput")
-        DB.add_input(data)
-    except Exception as e:
-        print e
-    return home()
-
-
-@app.route("/clear")
-def clear():
-    try:
-        DB.clear_all()
-    except Exception as e:
-        print e
-    return home()
 
 @app.route("/submitcrime", methods=['POST'])
 def submitcrime():
@@ -49,4 +36,7 @@ def submitcrime():
     return home()
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    handler = RotatingFileHandler('loghere.log', maxBytes=10000, backupCount=1)
+    handler.setLevel(logging.INFO)
+    app.logger.addHandler(handler)
+    app.run(debug=True)
