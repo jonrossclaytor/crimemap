@@ -23,8 +23,7 @@ def home():
 
 @app.route("/submitcrime", methods=['POST'])
 def submitcrime():
-
-
+    print('please print')
     category = request.form.get("category")
     date = request.form.get("date")
     latitude = float(request.form.get("latitude"))
