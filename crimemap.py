@@ -18,6 +18,7 @@ DB = DBHelper()
 def home():
     crimes = DB.get_all_crimes()
     crimes = json.dumps(crimes)
+    print('this is home')
     return render_template("home.html", crimes=crimes)
 
 
