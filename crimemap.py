@@ -13,12 +13,9 @@ else:
 app = Flask(__name__)
 DB = DBHelper()
 
-f = open('log.txt','w')
-
-
 @app.route("/")
 def home():
-    f.write('made it to home')
+    app.logger.info('made it to home')
     crimes = DB.get_all_crimes()
     crimes = json.dumps(crimes)
     print('this is home')
@@ -27,7 +24,6 @@ def home():
 
 @app.route("/submitcrime", methods=['POST'])
 def submitcrime():
-    f.write('made it to submitcrime')
     category = request.form.get("category")
     date = request.form.get("date")
     latitude = float(request.form.get("latitude"))
