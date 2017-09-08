@@ -23,9 +23,7 @@ def home():
 
 @app.route("/submitcrime", methods=['POST'])
 def submitcrime():
-    print('This error output', file=sys.stderr)
-    print('This standard output', file=sys.stdout)
-    print('This is regular print')
+
 
     category = request.form.get("category")
     date = request.form.get("date")
